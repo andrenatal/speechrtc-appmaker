@@ -42,16 +42,13 @@
     }
   </ceci-definition>
   <template>
-    <link rel="stylesheet" href="component.css">
-    <div class="counter">
-      <div class="count-wrapper">
-        <span class="count">{{value}}</span>
-        <span class="count-label">{{displayUnit}}</span>
-      </div>
-    </div>
+    <input type="button" value="SPEAK!" on-click="{{startSpeak}}"/>
     <shadow></shadow>
   </template>
     <script>
+
+
+
 
       function utils()
       {
@@ -65,6 +62,12 @@
       }
 
       Polymer("ceci-speecrtc-appmaker", {
+
+        startSpeak: function()
+        {
+           alert('speak dude!!!!');
+        },
+
         ready: function() {
           this.increment = Number(this.increment) || 1;
           this.value = Number(this.value) || 0;
@@ -75,9 +78,9 @@
 
           utils = new utils();
           console.log('Loading libs');
-          utils.include("js/binary.js");
-          utils.include("js/hark.bundle.js");
-          utils.include("js/speechrtc.js");
+          utils.include("//andrenatal.github.io/speechrtc-appmaker/js/binary.js");
+          utils.include("//andrenatal.github.io/speechrtc-appmaker/js/hark.bundle.js");
+          utils.include("//andrenatal.github.io/speechrtc-appmaker/js/speechrtc.js");
           console.log('libs loaded. should run');
         },
         value: 0,
