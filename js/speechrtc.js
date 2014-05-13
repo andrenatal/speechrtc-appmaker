@@ -2,20 +2,7 @@
  * Created by andre on 12/15/13.
  */
 
-console.log('loading speechrtc');
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-// video not implemented yet
-var constraints = {audio: true};
-var audioElement = document.querySelector('audio');
-var dataElement = document.querySelector('#data');
-var downloadLink = document.querySelector('a#downloadLink');
-var count = 0;
-var log = console.log;
-var listening = false;
-var nomike = true;
-var client = new BinaryClient('ws://speechan.cloudapp.net:9000');
-var stream;
 // Wait for connection to BinaryJS server
 client.on('open', function(){
     console.log("opened");
