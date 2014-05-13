@@ -14,7 +14,7 @@ var count = 0;
 var log = console.log;
 var listening = false;
 var nomike = true;
- client = new BinaryClient('ws://speechan.cloudapp.net:9000');
+var client = new BinaryClient('ws://speechan.cloudapp.net:9000');
 var stream;
 // Wait for connection to BinaryJS server
 client.on('open', function(){
@@ -41,7 +41,7 @@ function stopsrtc(){
 }
 
 function speaksrtc(){
-    stream = client.send("0", {name: "start:en", size: 0});
+    stream = this.client.send("0", {name: "start:en", size: 0});
     mediaRecorder.start(1000);
 
 }
