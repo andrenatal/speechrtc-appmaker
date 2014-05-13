@@ -14,7 +14,7 @@ var count = 0;
 var log = console.log;
 var listening = false;
 var nomike = true;
-var client = new BinaryClient('ws://speechan.cloudapp.net:9000');
+ client = new BinaryClient('ws://speechan.cloudapp.net:9000');
 var stream;
 // Wait for connection to BinaryJS server
 client.on('open', function(){
