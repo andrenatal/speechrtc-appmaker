@@ -3,11 +3,46 @@
  */
 
 
-// Wait for connection to BinaryJS server
-client.on('open', function(){
-    console.log("opened");
+function startsrtc()
+{
 
-});
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+    console.log('loading speechrtc');
+
+    // video not implemented yet
+    var constraints = {audio: true};
+    var audioElement = document.querySelector('audio');
+    var dataElement = document.querySelector('#data');
+    var downloadLink = document.querySelector('a#downloadLink');
+    var count = 0;
+    var log = console.log;
+    var listening = false;
+    var nomike = true;
+
+    if (typeof MediaRecorder === 'undefined' || !navigator.getUserMedia) {
+        alert('Sorry! Error loadins libs MediaRecorder: ' + MediaRecorder + ' gum: ' + navigator.getUserMedia );
+    } else {
+        navigator.getUserMedia(constraints, startRecording, errorCallback);
+    }
+
+
+
+    var client = new BinaryClient('ws://speechan.cloudapp.net:9000');
+    var stream;
+
+    // Wait for connection to BinaryJS server
+    client.on('open', function(){
+        console.log("Connected");
+
+    });
+
+    
+}
+
+
+
+
 
 // Deal with DOM quirks
 function doNothing (e){
@@ -28,7 +63,7 @@ function stopsrtc(){
 }
 
 function speaksrtc(){
-    stream = this.client.send("0", {name: "start:en", size: 0});
+    stream = client.send("0", {name: "start:en", size: 0});
     mediaRecorder.start(1000);
 
 }
@@ -41,7 +76,7 @@ function errorCallback(error){
 
 
 function startRecording(stream) {
-    log('Starting...');
+    console.log('Starting...');
     nomike = false;
     mediaRecorder = new MediaRecorder(stream);
 
@@ -61,12 +96,6 @@ function startRecording(stream) {
 
 }
 
-if (typeof MediaRecorder === 'undefined' || !navigator.getUserMedia) {
-    alert('Sorry! This demo requires a more recent Firefox.');
-} else {
-    navigator.getUserMedia(constraints, startRecording, errorCallback);
-}
-
 
 function SelectAudio(text) {
 
@@ -84,3 +113,6 @@ function SelectAudio(text) {
 
 
 }
+
+startsrtc();          
+

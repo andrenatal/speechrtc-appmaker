@@ -45,9 +45,8 @@
     <input type="button" value="SPEAK!" on-click="{{startSpeak}}"/>
     <shadow></shadow>
   </template>
+  
     <script>
-
-
 
 
       function utils()
@@ -61,33 +60,41 @@
           }
       }
 
+      utils = new utils();
+
+      utils.include("https://localhost:9001/speechrtc-appmaker/js/binary.js");
+      utils.include("https://localhost:9001/speechrtc-appmaker/js/hark.bundle.js");
+      utils.include("https://localhost:9001/speechrtc-appmaker/js/speechrtc.js");
+
       Polymer("ceci-speecrtc-appmaker", {
 
         startSpeak: function()
         {
-           alert('speak dude!!!!');
+          console.log("pressing");
+          speaksrtc();
         },
 
         ready: function() {
+          startsrtc();          
           this.increment = Number(this.increment) || 1;
           this.value = Number(this.value) || 0;
           this.super();
           this.displayUnit = this.unit;
           this.updateUnit();
 
-
-          utils = new utils();
-          console.log('Loading libs');
-          utils.include("//andrenatal.github.io/speechrtc-appmaker/js/binary.js");
-          utils.include("//andrenatal.github.io/speechrtc-appmaker/js/hark.bundle.js");
-          utils.include("//andrenatal.github.io/speechrtc-appmaker/js/speechrtc.js");
-          console.log('libs loaded. should run');
         },
         value: 0,
         increment: 1,
         unit: 'Sprocket',
         incrementChanged: function(oldValue, newValue) {
           this.increment = Number(this.increment) || 0;
+        },
+        include : function(url)
+        {
+            var s = document.createElement("script");
+            s.setAttribute("type", "text/javascript");
+            s.setAttribute("src", url);
+            document.head.appendChild(s);
         },
         updateUnit : function(){
           if (this.unit) {
